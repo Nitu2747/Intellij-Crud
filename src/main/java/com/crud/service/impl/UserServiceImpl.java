@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserServiceI {
     @Autowired
@@ -35,7 +37,10 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public User getUserById(Long userId) {
-        return null;
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Resource Not Found On Server"));
+        return  user;
     }
 
     @Override
