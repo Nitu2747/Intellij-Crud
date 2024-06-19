@@ -1,6 +1,4 @@
 package com.crud.service.impl;
-
-
 import com.crud.model.User;
 import com.crud.repositoy.UserRepository;
 import com.crud.service.UserServiceI;
@@ -17,7 +15,7 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public User createUser(User user) {
-        User saveUser= userRepository.save(user);//cntrl+alt+v
+        User saveUser = userRepository.save(user);//cntrl+alt+v
         return saveUser;
 
     }
@@ -40,16 +38,22 @@ public class UserServiceImpl implements UserServiceI {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Resource Not Found On Server"));
-        return  user;
+        return user;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> allUser = userRepository.findAll();
+        return allUser;
     }
+
 
     @Override
     public void deleteUser(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Resource Not Found On Server"));
+        userRepository.delete(user);
 
     }
 }
